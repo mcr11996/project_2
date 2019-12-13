@@ -85,4 +85,31 @@ int main() {
 	return 0;
 }
 
+	 // Solve for Pressure
+		while (itr < maxitr){
+			tempP[i][j] = p[i][j];
+			for (i=1; i<=(n-1); i++){
+				p[i][0] = p[i][1];
+				p[i][n] = p[i][n-1];
+			}
+			for (j=0; j<=n; j++){
+				p[0][j] = p[1][j];
+				p[n][j] = p[n-1][j];
+			}
+			for (i=1; i<=(n-1); i++){
+				for (j=1; j<=(n-1); j++){
+					p[i][j] = (dy*dy*(p[i-1][j]+p[i+1][j])+
+							dx*dx*(p[i][j-1]+p[i][j+1])-
+							dx*dx*dy*dy*((F[i][j]-F[i-1][j])/dx+
+							(G[i][j]-G[i][j-1])/dy)/dt)/(2*(dx*dx+dy*dy));
+					p[i][j] = tempP[i][j] + (p[i][j]-tempP[i][j]);
+				}
+			}
+			if (fabs(p-tempP) <= tol){
+				break;
+			}
+			itr++;
+		}
+
+
 }

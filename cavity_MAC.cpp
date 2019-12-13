@@ -82,10 +82,7 @@ int main() {
 			}
 		}
 
-	return 0;
-}
-
-	 // Solve for Pressure
+        // Solve for Pressure
 		while (itr < maxitr){
 			tempP[i][j] = p[i][j];
 			for (i=1; i<=(n-1); i++){
@@ -110,6 +107,14 @@ int main() {
 			}
 			itr++;
 		}
+
+
+
+
+	return 0;
+}
+
+	 
 
 
 }

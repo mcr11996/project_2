@@ -109,6 +109,28 @@ int main() {
 		}
 
 
+        // Update u:
+		for (i=0; i<=(n-1); i++){
+			for (j=0; j<=n; j++){
+				u[i][j] = F[i][j]-dt*(p[i+1][j]-p[i][j])/dx;
+			}
+		}
+
+		// Update v:
+		for (i=0; i<=n; i++){
+			for (j=0; j<= (n-1); j++){
+				v[i][j] = G[i][j]-dt*(p[i][j+1]-p[i][j])/dy;
+			}
+		}
+    
+	// Values at normal grid points:
+	for (i=0; i<=(n-1); i++){
+		for (j=0; j<=(n-1); j++){
+			uc[i][j] = 0.5*(u[i][j]+u[i][j+1]);
+			vc[i][j] = 0.5*(v[i][j]+v[i+1][j]);
+			pc[i][j] = 0.25*(p[i][j]+p[i+1][j]+p[i][j+1]+p[i+1][j+1]);
+		}
+	}
 
 
 	return 0;

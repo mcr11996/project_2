@@ -62,6 +62,25 @@ int main() {
 			v[i][n-1] = 0.0;
 
 		}
+		// Solve for F and G
+		for (i=1; i<=(n-2); i++){
+			for (j=1; j<=(n-1); j++){
+				F[i][j] = u[i][j]+dt*((u[i+1][j]-2*u[i][j]+u[i-1][j])/(Re*dx*dx)+
+						(u[i][j+1]-2*u[i][j]+u[i][j-1])/(Re*dy*dy)-
+						((u[i][j]+u[i+1][j])*(u[i][j]+u[i+1][j])-(u[i][j]+u[i-1][j])*(u[i][j]+u[i-1][j]))/(4*dx)-
+						((u[i][j+1]+u[i][j])*(v[i+1][j]+v[i][j])-(u[i][j]+u[i][j-1])*(v[i+1][j-1]+v[i][j-1]))/(4*dy));
+			}
+		}
+
+
+		for (i=1; i<=(n-1); i++){
+			for (j=1; j<=(n-2); j++){
+				G[i][j] = v[i][j]+dt*((v[i+1][j]-2*v[i][j]+v[i-1][j])/(Re*dx*dx)+
+						(v[i][j+1]-2*v[i][j]+v[i][j-1])/(Re*dy*dy)-
+						((v[i][j]+v[i+1][j])*(u[i][j]+u[i][j+1])-(v[i][j]+v[i-1][j])*(u[i-1][j]+u[i-1][j+1]))/(4*dx)-
+						((v[i][j]+v[i][j+1])*(v[i][j]*v[i][j+1])-(v[i][j]+v[i][j-1])*(v[i][j]+v[i][j-1]))/(4*dy));
+			}
+		}
 
 	return 0;
 }

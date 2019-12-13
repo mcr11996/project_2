@@ -131,6 +131,25 @@ int main() {
 			pc[i][j] = 0.25*(p[i][j]+p[i+1][j]+p[i][j+1]+p[i+1][j+1]);
 		}
 	}
+	
+	// Output:
+	FILE *pfile;
+	pfile = fopen("UVP.plt", "w+t");
+	if (pfile != NULL){
+		fprintf(pfile, "VARIABLES=\"x\",\"Y\",\"U\",\"V\",\"P\"n");
+		fprintf(pfile, "ZONE F=POINT\n");
+		fprintf(pfile, "I=%d, J=%d\n", n, n);
+
+		for (j=0; j<n; j++){
+			for (i=0; i<n; i++){
+				double xpos, ypos;
+				xpos = i*dx;
+				ypos = j*dy;
+				fprintf(pfile, "%5.8lf\t%5.8lf\t%5.8lf\t%5.8lf\t%5.8lf\n", xpos, ypos, uc[i][j], vc[i][j], pc[i][j]);
+			}
+		}
+	}
+	fclose(pfile);
 
 
 	return 0;
